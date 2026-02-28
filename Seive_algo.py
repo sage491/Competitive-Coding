@@ -19,3 +19,26 @@ def sieve_count(n):
 if __name__ == "__main__":
     n = 10000000000
     print(sieve_count(n))
+
+n = int(input())
+a = list(map(int, input().split()))
+
+max_ones = 0
+
+# Try all possible segments [i, j]
+for i in range(n):
+    for j in range(i, n):
+        # Count ones after flipping segment [i, j]
+        ones = 0
+        
+        for k in range(n):
+            if i <= k <= j:
+                # Inside flipped range: flip the value
+                ones += 1 - a[k]
+            else:
+                # Outside flipped range: keep original
+                ones += a[k]
+        
+        max_ones = max(max_ones, ones)
+
+print(max_ones)
